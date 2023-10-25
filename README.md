@@ -1,6 +1,12 @@
 # MarcelinhoCarioca
 Marcelinho Carioca é um bot para Discord feito em Golang. (para fins didáticos)
 
+### Comandos:
+
+- help (Lista os comandos)
+- ping (Mostra o ping do websockey)
+- avatar (Mostra o avatar do usuário)
+
 ### Para usar:
   Para clonar o repositório, você precisa do [Git](https://git-scm.com) e [Golang](https://golang.org).
 
