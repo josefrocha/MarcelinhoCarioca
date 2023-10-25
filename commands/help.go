@@ -14,6 +14,14 @@ type Cmd struct {
 	description string
 }
 
+func (c Cmd) Name() string {
+	return c.name
+}
+
+func (c Cmd) Description() string {
+	return c.description
+}
+
 func Cmds() []Command {
 	var cmds = []Command{
 		Cmd {
