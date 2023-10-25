@@ -7,8 +7,9 @@ import (
 )
 
 func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
-	memberID := args[1]
-	if memberID == "" {
+	var memberID string;
+	
+	if (len(args) < 1) {
 		memberID = message.Author.ID
 	}
 	
