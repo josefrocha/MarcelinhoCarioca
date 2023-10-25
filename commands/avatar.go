@@ -9,8 +9,10 @@ import (
 func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
 	var memberID string;
 	
-	if (len(args) < 1) {
+	if (len(args) < 2) {
 		memberID = message.Author.ID
+	} else if(len(args) == 2) {
+        memberID = args[1] 
 	}
 	
 	member, err := client.GuildMember(message.GuildID, memberID)
