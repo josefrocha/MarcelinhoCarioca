@@ -6,7 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args) {
+func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
 	memberID := args[1]
 	if memberID == "" {
 		memberID = message.Author.ID

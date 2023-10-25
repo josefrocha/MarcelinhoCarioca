@@ -2,31 +2,45 @@ package commands
 
 import (
 	"fmt"
-	
+
 	"github.com/bwmarrin/discordgo"
 )
 
-func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args) {
+func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
+	if (len(args) < 2) {
+		client.ChannelMessageSend(message.ChannelID, "Você não passou o ID nem o motivo.")
+		return
+	}
+
 	guildID := message.GuildID
     memberID := args[1]
-	reason := args[2]
+	var reason string;
 
 	if (memberID == "") {
         client.ChannelMessageSend(guildID, "Você não inseriu o id do usuário.")
+        return	
 	}
 
-	if (reason == "") {
+	if (len(args) > 2) {
+		reason = args[2]
+	} else {
 		reason = "Sem motivo"
 	}
 
 	member, err := client.GuildMember(guildID, memberID);
-	user := member.User
     if (err != nil) {
 	    client.ChannelMessageSend(guildID, "Esse usuário não está no servidor ou o ID é invalido.")
-	} 
-
-	err := client.GuildBanCreateWithReason(guildID, user, reason, 1);
-	if (err != nil) {
-		fmt.Println(err)
+		return
 	}
+
+	username := member.User.Username
+	userID := member.User.ID 
+
+	err = client.GuildBanCreateWithReason(guildID, userID, reason, 1);
+	if (err != nil) {
+		client.ChannelMessageSend(message.ChannelID, "Não foi possivel banir o membro, eu não tenho permissão suficiente.")
+		return
+	}
+
+	client.ChannelMessageSend(message.ChannelID, fmt.Sprintf("%v foi banido.\nMotivo: `%v`", username, reason))
 }

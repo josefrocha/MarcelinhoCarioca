@@ -36,12 +36,20 @@ func Cmds() []Command {
 			name:        "ping",
 			description: "Mostra o ping do websocket do bot.",
 		},
+		Cmd{
+			name:        "ban",
+			description: "Bane o usuário do servidor.",
+		},
+		Cmd{
+			name:        "unban",
+			description: "Desbane o usuário do servidor.",
+		},
 	}
 
 	return cmds
 }
 
-func Help(client *discordgo.Session, message *discordgo.MessageCreate, args) {
+func Help(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
 	fields := []*discordgo.MessageEmbedField{};
 
 	commands := Cmds();
