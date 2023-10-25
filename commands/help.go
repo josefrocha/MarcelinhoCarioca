@@ -41,7 +41,7 @@ func Cmds() []Command {
 	return cmds
 }
 
-func Help(client *discordgo.Session, message *discordgo.MessageCreate, args string) {
+func Help(client *discordgo.Session, message *discordgo.MessageCreate, args) {
 	fields := []*discordgo.MessageEmbedField{};
 
 	commands := Cmds();

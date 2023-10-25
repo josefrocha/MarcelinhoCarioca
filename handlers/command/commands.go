@@ -26,7 +26,7 @@ func (c Cmd) Description() string {
 	return c.description
 }
 
-func (c Cmd) Run(client *discordgo.Session, message *discordgo.MessageCreate, args string) {
+func (c Cmd) Run(client *discordgo.Session, message *discordgo.MessageCreate, args) {
 	c.run(client, message, args)
 }
 

@@ -6,15 +6,15 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args string) {
-	memberID := args
+func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args) {
+	memberID := args[1]
 	if memberID == "" {
 		memberID = message.Author.ID
 	}
 	
 	member, err := client.GuildMember(message.GuildID, memberID)
 	if err != nil {
-		client.ChannelMessageSend(message.ChannelID, "Este usuário não existe no meu banco de dados.");
+		client.ChannelMessageSend(message.ChannelID, "Este usuário não está no servidor.");
 		return
 	}
 
