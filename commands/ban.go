@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -14,17 +15,16 @@ func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args []str
 
 	guildID := message.GuildID
     memberID := args[1]
-	var reason string;
+	reason := "Sem motivo";
 
 	if (memberID == "") {
         client.ChannelMessageSend(guildID, "Você não inseriu o id do usuário.")
         return	
 	}
 
-	if (len(args) > 2) {
-		reason = args[2]
-	} else {
-		reason = "Sem motivo"
+	if (len(args) > 1) {
+		reasonText := args[2:]
+		reason = strings.Join(reasonText, " ")
 	}
 
 	member, err := client.GuildMember(guildID, memberID);
@@ -32,6 +32,8 @@ func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args []str
 	    client.ChannelMessageSend(guildID, "Esse usuário não está no servidor ou o ID é invalido.")
 		return
 	}
+
+	fmt.Println(reason)
 
 	username := member.User.Username
 	userID := member.User.ID 
@@ -42,5 +44,5 @@ func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args []str
 		return
 	}
 
-	client.ChannelMessageSend(message.ChannelID, fmt.Sprintf("%v foi banido.\nMotivo: `%v`", username, reason))
+	client.ChannelMessageSend(message.ChannelID, fmt.Sprintf("**%v** foi banido.\nMotivo: `%v`", username, reason))
 }

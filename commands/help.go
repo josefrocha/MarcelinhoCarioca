@@ -44,6 +44,14 @@ func Cmds() []Command {
 			name:        "unban",
 			description: "Desbane o usuário do servidor.",
 		},
+		Cmd{
+			name:        "mute",
+			description: "Muta o usuário por um tempo determinado no servidor.",
+		},
+		Cmd{
+			name:        "unmute",
+			description: "Desmuta o usuário no servidor.",
+		},
 	}
 
 	return cmds

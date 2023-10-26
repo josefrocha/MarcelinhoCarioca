@@ -10,7 +10,6 @@ import (
 
 func Mute(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
 	guildID := message.GuildID
-	fmt.Println("vai tse foder")
 
 	if len(args) < 3 {
 		client.ChannelMessageSend(guildID, "Você não inseriu o id do usuário e nem o tempo do mute (em segundos).")
@@ -36,8 +35,6 @@ func Mute(client *discordgo.Session, message *discordgo.MessageCreate, args []st
 		client.ChannelMessageSend(guildID, "Você não inseriu o id do usuário.")
 		return
 	}
-
-	fmt.Println(timeout)
 
 	member, err := client.GuildMember(message.GuildID, memberID)
 	userID := member.User.ID

@@ -8,12 +8,6 @@ import (
 
 func Unmute(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
 	guildID := message.GuildID
-
-	if len(args) < 2 {
-		client.ChannelMessageSend(guildID, "Você não inseriu o id do usuário")
-		return
-	}
-
 	memberID := args[1]
 
 	if memberID == "" {
@@ -33,5 +27,6 @@ func Unmute(client *discordgo.Session, message *discordgo.MessageCreate, args []
 		client.ChannelMessageSend(message.ChannelID, "Esse usuário não está mutado ou não tenho permissão suficiente.")
 		return
 	}
+	
 	client.ChannelMessageSend(message.ChannelID, fmt.Sprintf("%v foi desmutado", member.User.Username))
 }
