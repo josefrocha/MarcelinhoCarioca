@@ -36,6 +36,11 @@ func Mute(client *discordgo.Session, message *discordgo.MessageCreate, args []st
 		return
 	}
 
+	if memberID == message.Author.ID {
+		client.ChannelMessageSend(guildID, "Vai se mutar? tem certeza?!")
+		return
+	}
+
 	member, err := client.GuildMember(message.GuildID, memberID)
 	userID := member.User.ID
 	if err != nil {

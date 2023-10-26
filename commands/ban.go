@@ -22,6 +22,11 @@ func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args []str
         return	
 	}
 
+	if memberID == message.Author.ID {
+		client.ChannelMessageSend(guildID, "Vai se banir? tem certeza?!")
+		return
+	}
+
 	if (len(args) > 1) {
 		reasonText := args[2:]
 		reason = strings.Join(reasonText, " ")
