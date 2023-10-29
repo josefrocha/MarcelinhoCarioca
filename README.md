@@ -7,7 +7,7 @@ Marcelinho Carioca é um bot para Discord feito em Golang. (para fins didáticos
  > No seu Terminal:
 ```
 # Clonando o repositório
-$ git clone https://github.com/Leoff00/go-diego-bot.git
+$ git clone https://github.com/josefrocha/MarcelinhoCarioca.git
 
 # Entrando no repositório
 $ cd MarcelinhoCarioca
