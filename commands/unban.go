@@ -7,12 +7,17 @@ import (
 )
 
 func Unban(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
+	guildID := message.GuildID
 	if (len(args) < 2) {
 		client.ChannelMessageSend(message.ChannelID, "Você não passou o ID.")
 		return
 	}
-
-	guildID := message.GuildID
+	
+	if (len(message.Mentions) > 0) {
+		client.ChannelMessageSend(guildID, "Não há como banir com menção, apenas por ID.")
+		return
+	}
+	
     userArgumentId := args[1]
 
 	if (userArgumentId == "") {

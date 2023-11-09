@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"strings"
 	"fmt"
 
 	"github.com/bwmarrin/discordgo"
@@ -9,16 +10,28 @@ import (
 func Avatar(client *discordgo.Session, message *discordgo.MessageCreate, args []string) {
 	var memberID string;
 	
+	if len(message.Mentions) > 0 {
+		for _, user := range message.Mentions {
+			memberID = user.ID
+		}
+	}
+	
 	if (len(args) < 2) {
 		memberID = message.Author.ID
 	} else if(len(args) == 2) {
         memberID = args[1] 
 	}
+
+	replacements := []string{"@", "<", ">"}
+	for _, r := range replacements {
+		memberID = strings.Replace(memberID, r, "", -1)
+	}
 	
 	member, err := client.GuildMember(message.GuildID, memberID)
 	if err != nil {
-		client.ChannelMessageSend(message.ChannelID, "Este usuário não está no servidor.");
-		return
+		fmt.Println(err)
+		client.ChannelMessageSend(message.ChannelID, "Não foi possivel encontrar o usuário.");
+	 	return
 	}
 
 	avatar := member.AvatarURL("4096")

@@ -15,6 +15,11 @@ func Unmute(client *discordgo.Session, message *discordgo.MessageCreate, args []
 		return
 	}
 
+	if (len(message.Mentions) > 0) {
+		client.ChannelMessageSend(guildID, "Não há como banir com menção, apenas por ID.")
+		return
+	}
+
 	member, err := client.GuildMember(message.GuildID, memberID)
 	userID := member.User.ID
 	if err != nil {

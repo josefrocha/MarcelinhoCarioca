@@ -16,6 +16,11 @@ func Mute(client *discordgo.Session, message *discordgo.MessageCreate, args []st
 		return
 	}
 
+	if (len(message.Mentions) > 0) {
+		client.ChannelMessageSend(guildID, "Não há como banir com menção, apenas por ID.")
+		return
+	}
+
 	var timeout *time.Time
 	memberID := args[1]
 	timeu, _ := strconv.Atoi(args[2])
