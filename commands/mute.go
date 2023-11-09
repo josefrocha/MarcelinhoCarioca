@@ -17,7 +17,7 @@ func Mute(client *discordgo.Session, message *discordgo.MessageCreate, args []st
 	}
 
 	if (len(message.Mentions) > 0) {
-		client.ChannelMessageSend(guildID, "Não há como banir com menção, apenas por ID.")
+		client.ChannelMessageSend(guildID, "Não há como mutar com menção, apenas por ID.")
 		return
 	}
 

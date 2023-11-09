@@ -18,7 +18,7 @@ func Ban(client *discordgo.Session, message *discordgo.MessageCreate, args []str
 	reason := "Sem motivo";
 
 	if (len(message.Mentions) > 0) {
-		client.ChannelMessageSend(guildID, "Não há como banir com menção, apenas por ID.")
+		client.ChannelMessageSend(guildID, "Não há como banir por menção, apenas por ID.")
 		return
 	}
 
